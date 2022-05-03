@@ -80,3 +80,6 @@ Call $2? (y)es, (n)o, or (q)uit
 ### Calculate Hands Class
 
 ### Money Class
+
+
+man this is harder than I thought
