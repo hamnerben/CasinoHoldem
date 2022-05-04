@@ -57,7 +57,7 @@ Call $2? (y)es, (n)o, or (q)uit
 * A Menu Options Class
 * A card printing class
 * Random Number Sort class
-* Calulate Hands Class
+* Calculate Hands Class
   * will determine hand
   * will calculate winner
 * Money class
@@ -70,7 +70,9 @@ Call $2? (y)es, (n)o, or (q)uit
 ### User interface class
 
 ### Menu Class
+```python
 
+```
 ### Menu Options Class
 
 ### Card Printing Class
@@ -78,7 +80,57 @@ Call $2? (y)es, (n)o, or (q)uit
 ### Random Number Sort Class
 
 ### Calculate Hands Class
+```markdown
+==========================================
+~ PARSING THE REQUIREMENTS FOR THE HANDS ~
+==========================================
+Royal flush     — flush, ordered, royal cards
+Straight flush  — flush, ordered
+Four of a kind  — matching values 
+Full house      — matching values 
+Flush           — flush
+Straight        — ordered
+Three of a kind — matching values
+Two pair        — matching values
+Pair            — matching values
+High card       —
+```
 
+```python
+# Private methods:
+countMatches() # returns the highest number of matches exist in the hand
+countSets()    # returns the number of sets in a hand (a two pair would return 2)
+isFlush()      
+isStraight()
+isRoyal()
+sortHand()
+
+Def determineHand():
+If (isRoyal, isFlush, isStraight) return "royal flush"
+
+
+
+elif (isflush, isStraight) return "straight flush"
+elif(countMatches == 4) return "four of a kind"
+elif(countMatches == 2 and countMatches == 3) return "full house"
+elif(isFlush) return "flush"
+elif(isStraight) return "straight"
+elif(countMatches == 3) return "three of a kind"
+elif(countSets == 2 and countMatches == 2) return "two pair"
+elif(countMatches == 2) return "pair"
+else return "high card"
+```
+
+```python
+def isFlush(hand):
+    suitsCount = {'clubs':0,'spades':0,'hearts':0,'diamonds':0}
+    count the suits in the hand
+    if there doesnt exits a count >= 5
+        return (False,-1)
+    store the suited cards in a list
+    sort the cards using sortHand()
+    return (True, sortedHand)
+```
 ### Money Class
 
 
