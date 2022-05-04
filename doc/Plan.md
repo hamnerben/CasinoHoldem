@@ -79,7 +79,7 @@ Call $2? (y)es, (n)o, or (q)uit
 
 ### Random Number Sort Class
 
-### Calculate Hands Class
+### Hand Class
 ```markdown
 ==========================================
 ~ PARSING THE REQUIREMENTS FOR THE HANDS ~
@@ -105,31 +105,62 @@ isStraight()
 isRoyal()
 sortHand()
 
-Def determineHand():
-If (isRoyal, isFlush, isStraight) return "royal flush"
+values = {1:'a',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:'j',12:'q',13:'k',14:'a'}
+```
+```python
+def __init__(self, cards):
+    cards = cards
+    flush = False
+    straight = False
+    royal = False
+    matches = 0
+    sets = 0
+    
+def __len__(self):
+    return len(self.cards)
+```
 
 
 
-elif (isflush, isStraight) return "straight flush"
-elif(countMatches == 4) return "four of a kind"
-elif(countMatches == 2 and countMatches == 3) return "full house"
-elif(isFlush) return "flush"
-elif(isStraight) return "straight"
-elif(countMatches == 3) return "three of a kind"
-elif(countSets == 2 and countMatches == 2) return "two pair"
-elif(countMatches == 2) return "pair"
-else return "high card"
+```python
+# Def determineHand():
+# 
+#   elif (isflush, isStraight) return "straight flush"
+#   elif(countMatches == 4) return "four of a kind"
+#   elif(countMatches == 2 and countMatches == 3) return "full house"
+#   elif(isFlush) return "flush"
+#   elif(isStraight) return "straight"
+#   elif(countMatches == 3) return "three of a kind"
+#   elif(countSets == 2 and countMatches == 2) return "two pair"
+#   elif(countMatches == 2) return "pair"
+#   else return "high card"
 ```
 
 ```python
-def isFlush(hand):
+def isFlush(self):
     suitsCount = {'clubs':0,'spades':0,'hearts':0,'diamonds':0}
     count the suits in the hand
     if there doesnt exits a count >= 5
-        return (False,-1)
-    store the suited cards in a list
-    sort the cards using sortHand()
-    return (True, sortedHand)
+        return False
+    remove the non suited cards
+    return True    
+```
+
+```python
+def isStraight(self):
+    self.sortHand()
+```
+
+```python
+def sortHand(self):
+    sortingHand(self,0)
+
+def sortingHand(self,  i, highCard):
+    if i > len(self): return 
+    if self[i].getVal() > highCard.getVal():
+        newHighCard = self[i] 
+        self[i] = highCard
+        sortingHand(self, i+1, newHighCard)
 ```
 ### Money Class
 
