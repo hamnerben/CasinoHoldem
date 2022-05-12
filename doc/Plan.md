@@ -126,6 +126,7 @@ def __len__(self):
 ```python
 Def determineHand():
     # Royal flush     — flush, ordered, royal cards
+    sort()
     checkFlush()      
     checkStraight()
     checkRoyal()    
@@ -143,17 +144,23 @@ Def determineHand():
 ```
 
 ```python
-def isFlush(self):
+def checkFlush(self):
+  """if exists >= 5 suited cards
+  stores True on hand for flush
+  and puts suited cards in varCards"""
     suitsCount = {'clubs':0,'spades':0,'hearts':0,'diamonds':0}
     count the suits in the hand
     if there doesnt exits a count >= 5
-        return False
+        set flush to False
     remove the non suited cards
-    return True    
+    set flush to True    
 ```
 
 ```python
 def checkStraight(self):
+  """if straight of >=5 cards exists
+  stores them in varCards
+  sets straight to True"""
     cnt = 0
     straight = False
     straightCards = []
@@ -172,7 +179,35 @@ def checkStraight(self):
 ```
 
 ```python
+def checkRoyal(self):
+  '''sets cardsVal in self to only royal cards
+  sets royal to true'''
+    cards = []
+    royalCnt = {'a':0,'k':0,'q':0,'j':0,'10':0}
+    for card in hand:
+        check for royal and add it to cnt
+    if there is at least 1 of each royal card
+        set royal to true and update cardsVar
+```
+
+```python
+def countSets(self):
+  '''counts the sets in the hand
+  stores count in hand dict
+  stores the cards in varCards'''
+    valCnt = {all the vals = 0}
+    cards = []
+    for card in hand:
+        increment valCnt for the cards val
+    for card in hand:
+        if valCnt for val > 1 store that card
+
+```
+
+```python
 def sortHand(self):
+  """Sorts the cards in the hand
+  'a' is set as highest"""
     sortingHand(self,0)
 
 def sortingHand(self,  i, highCard):
