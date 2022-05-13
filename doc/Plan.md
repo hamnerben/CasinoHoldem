@@ -105,6 +105,10 @@ checkRoyal()
 sortHand()
 rstIndicators()
 
+# getters
+getHandName()
+getCards()
+
 values = {1:'a',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:'j',12:'q',13:'k',14:'a'}
 ```
 ```python
@@ -116,6 +120,7 @@ def __init__(self, cards):
     royal = False
     topSetSize = 0
     sets = 0
+    handName = self.determineHand()
     
 def __len__(self):
     return len(self.cards)
@@ -124,9 +129,10 @@ def __len__(self):
 
 
 ```python
-Def determineHand():
+def determineHand(self):
+"""determines and returns the hand name"""
     # Royal flush     — flush, ordered, royal cards
-    sort()
+    self.sort()
     checkFlush()      
     checkStraight()
     checkRoyal()    
@@ -135,10 +141,10 @@ Def determineHand():
     # Straight flush  — flush, ordered
     # Four of a kind  — matching values 
     rstIndicators()
-    sorthand()
     countSets()
     if topSetSize >= 4 return the hand and hand type
     # Full house      — matching values 
+    if topSetSize 
     # Flush           — flush
     # Straight        — ordered
     # Three of a kind — matching values
@@ -148,7 +154,7 @@ Def determineHand():
 ```
 
 ```python
-def checkFlush(self):
+def checkFlush(self,cards):
   """if exists >= 5 suited cards
   stores True on hand for flush
   and puts suited cards in tempCards"""
@@ -161,7 +167,7 @@ def checkFlush(self):
 ```
 
 ```python
-def checkStraight(self):
+def checkStraight(self,cards):
   """if straight of >=5 cards exists
   stores them in tempCards
   sets straight to True"""
@@ -183,19 +189,22 @@ def checkStraight(self):
 ```
 
 ```python
-def checkRoyal(self):
+def checkRoyal(self,cards):
   '''sets cardsVal in self to only royal cards
   sets royal to true'''
-    cards = []
+    royalCards = []
     royalCnt = {'a':0,'k':0,'q':0,'j':0,'10':0}
     for card in hand:
         check for royal and add it to cnt
     if there is at least 1 of each royal card
-        set royal to true and update cardsVar
+        set royal to true and update tempCards
 ```
+sometimes will want to use to check `__cards` sometimes will want
+to use on `tempCards` for that reason a hand is passed in.
+
 
 ```python
-def countSets(self,hand):
+def countSets(self):
   '''counts the sets and set size in the hand
   stores set count in hand dict
   stores highest match number in hand
