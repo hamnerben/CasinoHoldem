@@ -98,24 +98,24 @@ High card       —
 
 ```python
 # Private methods:
-countMatches() # returns the highest number of matches exist in the hand
-countSets()    # returns the number of sets in a hand (a two pair would return 2)
+countSets() 
 checkFlush()      
 checkStraight()
 checkRoyal()
 sortHand()
+rstIndicators()
 
 values = {1:'a',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:'j',12:'q',13:'k',14:'a'}
 ```
 ```python
 def __init__(self, cards):
-    cards = cards
-    state = { varCards = cards
+    __cards = cards  # shouldn't be changed
+    tempCards = cards
     flush = False
     straight = False
     royal = False
-    matches = 0
-    sets = 0 }
+    topSetSize = 0
+    sets = 0
     
 def __len__(self):
     return len(self.cards)
@@ -134,6 +134,10 @@ Def determineHand():
     
     # Straight flush  — flush, ordered
     # Four of a kind  — matching values 
+    rstIndicators()
+    sorthand()
+    countSets()
+    if topSetSize >= 4 return the hand and hand type
     # Full house      — matching values 
     # Flush           — flush
     # Straight        — ordered
@@ -147,7 +151,7 @@ Def determineHand():
 def checkFlush(self):
   """if exists >= 5 suited cards
   stores True on hand for flush
-  and puts suited cards in varCards"""
+  and puts suited cards in tempCards"""
     suitsCount = {'clubs':0,'spades':0,'hearts':0,'diamonds':0}
     count the suits in the hand
     if there doesnt exits a count >= 5
@@ -159,7 +163,7 @@ def checkFlush(self):
 ```python
 def checkStraight(self):
   """if straight of >=5 cards exists
-  stores them in varCards
+  stores them in tempCards
   sets straight to True"""
     cnt = 0
     straight = False
@@ -173,7 +177,7 @@ def checkStraight(self):
         elif not straight: reset cnt and reset cardsList and reset two&Ace
         else: exit loop # the next card is not in sequence but >= 5 cnt
     if straight: 
-        assign straightCards to self.state[varCards]
+        assign straightCards to self.state[tempCards]
         assign true to isStraight on self
         
 ```
@@ -191,18 +195,39 @@ def checkRoyal(self):
 ```
 
 ```python
-def countSets(self):
-  '''counts the sets in the hand
-  stores count in hand dict
-  stores the cards in varCards'''
-    valCnt = {all the vals = 0}
+def countSets(self,hand):
+  '''counts the sets and set size in the hand
+  stores set count in hand dict
+  stores highest match number in hand
+  stores the cards ordered from highest set size in tempCards'''
+    valCnts = {all the vals = 0}
+    sets = 0
     cards = []
     for card in hand:
         increment valCnt for the cards val
+      
     for card in hand:
-        if valCnt for val > 1 store that card
-
+        if valCnt for val >= 3 store that card mark as used
+    for card in hand:
+        if valCnt > 1 and not used: store that card and mark as used
+    for card in hand:
+        store the rest of the unmarked cards after the others
+    topCnt = 0
+    for valCnt in valCnts:
+        get highest val
+        count the sets
+    store topCnt
+    store sets
+    store cards in tempCards
+    unmark the cards in hand
 ```
+**What Happens with bad input?**
+* This method only works if the hand is passed in ordered.
+
+The above `countSets()` method will store any sets first in `tempCards` and
+the remaining cards after.  The previous `flush()` and `straight()` methods
+will automatically store at least 5 cards so I initailly didn't think to store
+the extra cards. **TODO: implement that, I don't want to redesign it right now**
 
 ```python
 def sortHand(self):
