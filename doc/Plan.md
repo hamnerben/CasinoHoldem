@@ -66,7 +66,7 @@ Call $2? (y)es, (n)o, or (q)uit
 
 # Phase 2:
 
-## User interface class
+## User interface module
 0. `Welcome to Casino Hold'em`
    1. `N - New game`
    2. `X - Exit`
@@ -76,10 +76,36 @@ Call $2? (y)es, (n)o, or (q)uit
    2. `(c)ontinue, new (a)nte, or (q)uit`
      
 ## Prompt Class
+```python
+def __init__(self, chCommands, prompt):
+    self.chCommands = chCommands
+    self.prompt = prompt
+```
 
-## Card Printing Class
+```python
+def prompt(self):
+    # keep looping
+    # check if input is valid
+    # if so return the command inputed
+    # otherwise throw a message and keep looping
+```
 
-## Random Number Sort Class
+## Card Printing module
+
+
+## Card Class
+```python
+def __init__(self, value, suit):
+    self.val = value
+    self.suit = suit
+    self.used = False
+```
+## Deck Class
+
+* `card(n)`
+* `shuffleDeck()`
+
+I am just going to make a list of cards and use `random.shuffle(list)`
 
 ## Hand Class
 ```markdown
