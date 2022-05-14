@@ -1,13 +1,12 @@
 # Plan
 ***3.20.2022***
 
-## Phase 0:
+# Phase 0:
 
-### End goal:
+## End goal:
 **Casino Hold'em poker** a way to play Casino Hold'em Poker that allows you to view your cards against
 the houses cards.  We want to make this program so that it could easily add features in the future.
-
-### Interface:
+## Interface:
 ```
 Welcome to Casino Hold'em
   N - New game
@@ -51,7 +50,7 @@ Call $2? (y)es, (n)o, or (q)uit
 >
 ```
 
-## Phase 1:
+# Phase 1:
 * User Interface Class
 * A Menu Class
 * A Menu Options Class
@@ -65,21 +64,24 @@ Call $2? (y)es, (n)o, or (q)uit
   * algorithm for betting etc
 
 
-## Phase 2:
+# Phase 2:
 
-### User interface class
+## User interface class
+0. `Welcome to Casino Hold'em`
+   1. `N - New game`
+   2. `X - Exit`
+1. `Enter an ante amount [$1 - $x]:`
+2. forever loop:
+   1. `(c)all or (f)old`
+   2. `(c)ontinue, new (a)nte, or (q)uit`
+     
+## Prompt Class
 
-### Menu Class
-```python
+## Card Printing Class
 
-```
-### Menu Options Class
+## Random Number Sort Class
 
-### Card Printing Class
-
-### Random Number Sort Class
-
-### Hand Class
+## Hand Class
 ```markdown
 ==========================================
 ~ PARSING THE REQUIREMENTS FOR THE HANDS ~
@@ -251,7 +253,26 @@ def sortingHand(self,  i, highCard):
         self[i] = highCard
         sortingHand(self, i+1, newHighCard)
 ```
-### Money Class
+## Balance Class
 
+* `getBal()`
+* `getAnte()`
+* `setAnte()`
+* `payAnte()`
+* `won(handName)`
+* `lost()`
 
-man this is harder than I thought
+```python
+def __init__(self, ante):
+    self.ante = ante
+    self.balance = BALANCE
+```
+
+```python
+def won(self, handName):
+    """determines amount earned based on winning hand,
+    adds said amount to object's balance"""
+    # lookup the ratio based on the handName
+    # multiply it to the ante
+    # add the amount to the object's balance
+```
