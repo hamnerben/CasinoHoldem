@@ -1,11 +1,15 @@
 
 
 class Card:
+
+    ASCII = {('ace','spades'): ' _____\n|A .  |\n| /.\ |\n|(_._)|\n|  |  |\n|____V|\n'}
+
+
     def __init__(self, value, suit):
         self.val = value
         self.suit = suit
         self.used = False
-
+        self.ascii = ASCII[(value,suit)]
 
     def __str__(self):
         return (f"{self.val} of {self.suit}")
