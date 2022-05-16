@@ -91,7 +91,19 @@ def prompt(self):
 ```
 
 ## Card Printing module
+the main print cards function will accept a list of cards to print
+and the method will print the cards side by side.
 
+The method will need to add whitespace on each line that doesn't measure
+up to be as long as the longest line.
+
+```python
+def printCards(ls):
+    find the greatest card length
+    for loop range the greatest length
+        for loop each card and find the maxLineLength
+        for loop each card and print the index line checking for out of bounds
+```
 
 ## Card Class
 ```python
@@ -104,6 +116,14 @@ def __init__(self, value, suit):
 
 * `card(n)`
 * `shuffleDeck()`
+
+```python
+def __init__(self):
+    cards = []
+    for s in SUIT_LIST:
+        for v in VAL_LIST:
+            cards.append(Card(v, s))
+```
 
 I am just going to make a list of cards and use `random.shuffle(list)`
 
