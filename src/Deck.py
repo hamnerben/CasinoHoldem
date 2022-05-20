@@ -27,11 +27,11 @@ class Deck:
         else:
             raise IndexError
 
+    def temp(self):
+        for card in self.__cards:
+            # ('spades', 'a'): [' _____', '|A .  |', '| /.\\ |', '|(_._)|', '|  |  |', '|____V|'],
+            print(f"('{card.getSuit()}', '{card.getVal()}'): ['', '', '', '', '', ''],")
+
 if __name__ == '__main__':
     dk = Deck()
-    print(dk)
-    cd = dk.card(28)
-    print()
-    print(cd)
-    print()
-    print(cd.ascii)
+    dk.temp()

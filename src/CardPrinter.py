@@ -22,8 +22,6 @@ def row(cards):
 
 
 
-
-
 if __name__ == '__main__':
     dk = Deck.Deck()
     cards = [dk.card(2), dk.card(6), dk.card(23), dk.card(50)]
