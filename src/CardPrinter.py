@@ -16,7 +16,7 @@ def row(cards):
     for l in range(longestCard):
         maxLine = 0
         for card in cards:
-            
+
 
 
 

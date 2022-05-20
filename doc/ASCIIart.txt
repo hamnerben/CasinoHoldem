@@ -128,7 +128,7 @@ ejm98        | _>^^|           _____
 ('clubs', '3') :
 ('clubs', '2') :
 ('diamonds', 'a') : "\n|A ^  |\n| / \ |\n| \ / |\n|  .  |\n|____V|\n"
-('diamonds', 'k') : " _____\n|K  WW|\n| /\{)|\n| \/%%|\n|  %%%|\n|_%%%>|\n"
+('diamonds', 'k') : " _____\n|K  WW|\n| /\{)|\n| \/%%|\n|  %%%|\n|_%%%>|\n",
 ('diamonds', 'q') :
 ('diamonds', 'j') :
 ('diamonds', '10') :
@@ -150,7 +150,7 @@ ejm98        | _>^^|           _____
 ('hearts', '7') :
 ('hearts', '6') :
 ('hearts', '5') :
-('hearts', '4') :
+('hearts', '4') : " _____ \n|4    |\n| v v |\n|     |\n| v v |\n|____h|",
 ('hearts', '3') :
 ('hearts', '2') :
 
