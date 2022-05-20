@@ -92,64 +92,65 @@ ejm98        | _>^^|           _____
                             _____           |o o o||o o o|
                     _____  |K  WW|          |____8||o o o|
             _____  |Q  ww| | /\{)|                 |____6|
-     _____ |J  ww| | /\{(| | \/%%| _____
-    |10 o || /\{)| | \/%%| |  %%%||A ^  |
-    |o o o|| \/% | |  %%%| |_%%%>|| / \ |
-    |o o o||   % | |_%%%O|        | \ / |
-    |o o o||__%%[|                |  .  |
-    |___0I|                       |____V|
+     _____ |J  ww| | /\{(| | \/%%|
+    |10 o || /\{)| | \/%%| |  %%%|
+    |o o o|| \/% | |  %%%| |_%%%>|
+    |o o o||   % | |_%%%O|        
+    |o o o||__%%[|                
+    |___0I|                       
 
 
 
-(spades, a) :
-(spades, k) :
-(spades, q) :
-(spades, j) :
-(spades, 10) :
-(spades, 9) :
-(spades, 8) :
-(spades, 7) :
-(spades, 6) :
-(spades, 5) :
-(spades, 4) :
-(spades, 3) :
-(spades, 2) :
-(clubs, a) :
-(clubs, k) :
-(clubs, q) :
-(clubs, j) :
-(clubs, 10) :
-(clubs, 9) :
-(clubs, 8) :
-(clubs, 7) :
-(clubs, 6) :
-(clubs, 5) :
-(clubs, 4) :
-(clubs, 3) :
-(clubs, 2) :
-(diamonds, a) :
-(diamonds, k) :
-(diamonds, q) :
-(diamonds, j) :
-(diamonds, 10) :
-(diamonds, 9) :
-(diamonds, 8) :
-(diamonds, 7) :
-(diamonds, 6) :
-(diamonds, 5) :
-(diamonds, 4) :
-(diamonds, 3) :
-(diamonds, 2) :
-(hearts, a) :
-(hearts, k) :
-(hearts, q) :
-(hearts, j) :
-(hearts, 10) :
-(hearts, 9) :
-(hearts, 8) :
-(hearts, 7) :
-(hearts, 6) :
-(hearts, 5) :
-(hearts, 4) :
-(hearts, 3) :
-(hearts, 2) :
+('spades', 'a') :
+('spades', 'k') : " _____ \n|K  WW|\n| ^ {)|\n|(.)%%|\n| |%%%|\n|_%%%>|\n",
+('spades', 'q') :
+('spades', 'j') :
+('spades', '10') :
+('spades', '9'): " _____ \n|9    |\n|^ ^ ^|\n|^ ^ ^|\n|^ ^ ^|\n|____6|\n",
+('spades', '8') :
+('spades', '7') :
+('spades', '6') :
+('spades', '5') :
+('spades', '4') :
+('spades', '3') :
+('spades', '2') :
+('clubs', 'a') :
+('clubs', 'k') :
+('clubs', 'q') :
+('clubs', 'j') :
+('clubs', '10') :
+('clubs', '9') :
+('clubs', '8') :
+('clubs', '7') :
+('clubs', '6') :
+('clubs', '5') : " _____ \n|5    |\n| & & |\n|  &  |\n| & & |\n|____S|",
+('clubs', '4') :
+('clubs', '3') :
+('clubs', '2') :
+('diamonds', 'a') : "\n|A ^  |\n| / \ |\n| \ / |\n|  .  |\n|____V|\n"
+('diamonds', 'k') : " _____\n|K  WW|\n| /\{)|\n| \/%%|\n|  %%%|\n|_%%%>|\n"
+('diamonds', 'q') :
+('diamonds', 'j') :
+('diamonds', '10') :
+('diamonds', '9') :
+('diamonds', '8') :
+('diamonds', '7') :
+('diamonds', '6') :
+('diamonds', '5') :
+('diamonds', '4') :
+('diamonds', '3') :
+('diamonds', '2') :
+('hearts', 'a') :
+('hearts', 'k') :
+('hearts', 'q') :
+('hearts', 'j') :
+('hearts', '10') :
+('hearts', '9') :
+('hearts', '8') :
+('hearts', '7') :
+('hearts', '6') :
+('hearts', '5') :
+('hearts', '4') :
+('hearts', '3') :
+('hearts', '2') :
+
