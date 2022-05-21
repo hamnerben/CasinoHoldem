@@ -15,10 +15,10 @@ class Deck:
         return len(self.__cards)
 
     def __str__(self):
-        list = []
+        str = ''
         for i in range(len(self)):
-            list.append(f"{i}: {self.__cards[i]}")
-        return '\n'.join(list)
+            str += f"{self.__cards[i]}"
+        return str
 
     def card(self, n):
         """return the card by the number passed in, starting with 1"""
@@ -27,11 +27,7 @@ class Deck:
         else:
             raise IndexError
 
-    def temp(self):
-        for card in self.__cards:
-            # ('spades', 'a'): [' _____', '|A .  |', '| /.\\ |', '|(_._)|', '|  |  |', '|____V|'],
-            print(f"('{card.getSuit()}', '{card.getVal()}'): ['', '', '', '', '', ''],")
 
 if __name__ == '__main__':
     dk = Deck()
-    dk.temp()
+    print(dk)
