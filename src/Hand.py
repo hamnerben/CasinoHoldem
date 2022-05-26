@@ -1,7 +1,12 @@
+import CardPrinter
 from Card import Card
+from CardPrinter import row
 
 class Hand:
     def __init__(self, cards):
+        for obj in cards:
+            if not isinstance(obj, Card):
+                raise TypeError(f"Expected Card object but received {type(obj)}")
         self.__cards = cards  # shouldn't be changed
         self.tempCards = cards
         self.flush = False
@@ -17,15 +22,8 @@ class Hand:
 
 
     def __str__(self):
-        str = ''
-        for card in self.__cards:
-            str += f"{card}\n"
+        str = CardPrinter.row(self.__cards)
 
-        # to see the effects of checkFlush()
-        str += f"flush: {self.flush}\n"
-
-        for card in self.tempCards:
-            str += f"{card}\n"
         return str
 
     def checkFlush(self, cards):
