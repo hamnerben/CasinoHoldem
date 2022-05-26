@@ -47,7 +47,7 @@ class Deck:
     def shuffle(self):
         random.shuffle(self.__cards)
 
-    def printGrid(self,cols):
+    def printGrid(self, cols):
         rows = []
         for row in range(math.ceil(len(self)/cols)):
             rows.append([])
@@ -61,7 +61,5 @@ class Deck:
             CardPrinter.row(rows[i])
 
 if __name__ == '__main__':
-    cols = int(input("how many columns? >"))
     dk = Deck()
-    for i in range(4):
-        dk.printGrid(cols)
+    print(dk.card(1))

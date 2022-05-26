@@ -1,13 +1,21 @@
+import Card
 import Deck
 
 def printCards(cards):
+    for obj in cards:
+        if not isinstance(obj, Card.Card):
+            raise TypeError
     for card in cards:
         print(card)
         try:
             print(card.ascii)
         except:
             pass
+
 def row(cards):
+    for obj in cards:
+        if not isinstance(obj, Card.Card):
+            raise TypeError
     longestCard = 0
     for card in cards:
         if len(card) > longestCard:
@@ -20,7 +28,8 @@ def row(cards):
         print()
 
 
-
+def checkType(cards):
+    print(type(cards[0]))
 
 if __name__ == '__main__':
     dk = Deck.Deck()
