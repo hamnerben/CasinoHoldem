@@ -19,7 +19,7 @@ def rowStr(cards):
         str += '\n'
     return str
 
-def grid(cards, cols):
+def gridStr(cards, cols):
     rows = []
     str =''
     for row in range(math.ceil(len(cards)/cols)):

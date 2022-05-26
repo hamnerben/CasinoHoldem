@@ -47,9 +47,14 @@ class Deck:
         random.shuffle(self.__cards)
 
     def printGrid(self,cols):
-        print(CardPrinter.grid(self.__cards,cols))
+        print(CardPrinter.gridStr(self.__cards,cols))
 
 
 if __name__ == '__main__':
     dk = Deck()
     dk.printGrid(13)
+    for i in range(3):
+        dk.shuffle()
+        print()
+        print()
+        dk.printGrid(13)
