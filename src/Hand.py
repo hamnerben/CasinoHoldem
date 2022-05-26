@@ -1,6 +1,6 @@
 import CardPrinter
 from Card import Card
-from CardPrinter import row
+from CardPrinter import rowStr
 
 class Hand:
     def __init__(self, cards):
@@ -16,14 +16,11 @@ class Hand:
         self.sets = 0
         # handName = self.determineHand()
 
-
     def __len__(self):
         return len(self.__cards)
 
-
     def __str__(self):
-
-        return CardPrinter.row(self.__cards)
+        return CardPrinter.rowStr(self.__cards)
 
     def checkFlush(self, cards):
         """if exists >= 5 suited cards
