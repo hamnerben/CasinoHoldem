@@ -1,16 +1,6 @@
 import Card
 import Deck
 
-def printCards(cards):
-    for obj in cards:
-        if not isinstance(obj, Card.Card):
-            raise TypeError(f"Expected Card object but received {type(obj)}")
-    for card in cards:
-        print(card)
-        try:
-            print(card.ascii)
-        except:
-            pass
 
 def row(cards):
     for obj in cards:
@@ -29,9 +19,6 @@ def row(cards):
         str += '\n'
     return str
 
-
-def checkType(cards):
-    print(type(cards[0]))
 
 if __name__ == '__main__':
     dk = Deck.Deck()

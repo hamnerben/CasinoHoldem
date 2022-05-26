@@ -58,8 +58,8 @@ class Deck:
                     l.append(dk[i])
             x += cols
         for i in range(math.ceil(len(self)/cols)):
-            CardPrinter.row(rows[i])
+            print(CardPrinter.row(rows[i]),end='')
 
 if __name__ == '__main__':
     dk = Deck()
-    print(dk.card(1))
+    dk.printGrid(13)

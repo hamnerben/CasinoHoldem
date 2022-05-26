@@ -22,9 +22,8 @@ class Hand:
 
 
     def __str__(self):
-        str = CardPrinter.row(self.__cards)
 
-        return str
+        return CardPrinter.row(self.__cards)
 
     def checkFlush(self, cards):
         """if exists >= 5 suited cards
