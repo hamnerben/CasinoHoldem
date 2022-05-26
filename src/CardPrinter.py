@@ -20,12 +20,14 @@ def row(cards):
     for card in cards:
         if len(card) > longestCard:
             longestCard = len(card)
+    str = ''
     for l in range(longestCard):
         maxLine = 0
         for card in cards:
             if len(card) > l:
-                print(card.ascii[l], end='')
-        print()
+                str += card.ascii[l]
+        str += '\n'
+    return str
 
 
 def checkType(cards):
@@ -35,4 +37,4 @@ if __name__ == '__main__':
     dk = Deck.Deck()
     cards = [dk.card(2), dk.card(6), dk.card(23), dk.card(50)]
     list = [1,2,1,23]
-    row(cards)
+    print(row(cards))
