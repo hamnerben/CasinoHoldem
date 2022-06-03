@@ -29,7 +29,6 @@ class Hand:
         str += '\n'
         return str
 
-
     def state(self):
         print("--HAND--")
         print(self.getNames(self.cards))
@@ -41,6 +40,19 @@ class Hand:
         print(f"Top set size: {self.topSetSize}")
         print(f"number of sets: {self.sets}")
         print("===============\n")
+
+    def sortHand(self):
+        """Sorts the cards in the hand
+          'a' is set as highest"""
+        self.sortingHand()
+
+    def sortingHand(self,i,highCard):
+        if i > len(self): return
+        if self[i] > highCard:
+            newHighCard = self[i]
+            self[i] = highCard
+            self.sortingHand(i+1,newHighCard)
+
 
     def checkFlush(self, cards):
         """if exists >= 5 suited cards

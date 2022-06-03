@@ -1,6 +1,6 @@
 class Card:
 
-
+    VALUES = ['2','3','4','5','6','7','8','9','10','j','q','k','a']
 
     ASCIIS = { 'blank' :  ['_____', '|\\ ~ /|', '|}}:{{|', '|}}:{{|', '|}}:{{|', '|/_~_\\|'],
                ('spades', 'a'): [' _____ ', '|A .  |', '| /.\\ |', '|(_._)|', '|  |  |', '|____V|'],
@@ -70,6 +70,15 @@ class Card:
     def __str__(self):
         return self.art()
 
+    def __eq__(self, other):
+        return (self.val == other.val)
+
+    def __ge__(self, other):
+        return (self.VALUES.index(self.val) <= other.VALUES.index(other.val))
+
+    def __lt__(self, other):
+        return (self.VALUES.index(self.val) < other.VALUES.index(other.val))
+
     def getVal(self): return self.val
 
     def getSuit(self): return self.suit
@@ -87,6 +96,5 @@ class Card:
         return str
 
 if __name__ == '__main__':
-   cd = Card('k','spades')
-   print(cd.art())
-   print(type(cd))
+
+   print(Card('2','spades') > Card('a','hearts'))
