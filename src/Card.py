@@ -74,6 +74,8 @@ class Card:
 
     def getSuit(self): return self.suit
 
+    def isUsed(self): return self.used
+
     def setUsed(self): self.used = True
 
     def setNotUsed(self): self.used = False

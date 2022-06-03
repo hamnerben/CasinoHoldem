@@ -7,7 +7,7 @@ class Hand:
         for obj in cards:
             if not isinstance(obj, Card):
                 raise TypeError(f"Expected Card object but received {type(obj)}")
-        self.__cards = cards  # shouldn't be changed
+        self.cards = cards  # shouldn't be changed
         self.tempCards = cards
         self.flush = False
         self.straight = False
@@ -17,10 +17,30 @@ class Hand:
         # handName = self.determineHand()
 
     def __len__(self):
-        return len(self.__cards)
+        return len(self.cards)
 
     def __str__(self):
-        return CardPrinter.rowStr(self.__cards)
+        return CardPrinter.rowStr(self.cards)
+
+    def getNames(self, cards):
+        str = ''
+        for i in cards:
+            str += (f"<{i.getVal()} of {i.getSuit()}>\n")
+        str += '\n'
+        return str
+
+
+    def state(self):
+        print("--HAND--")
+        print(self.getNames(self.cards))
+        print("--TEMPCARDS--")
+        print(self.getNames(self.tempCards))
+        print(f"Is Flush: {self.flush}")
+        print(f"Is Straight: {self.straight}")
+        print(f"Is Royal: {self.royal}")
+        print(f"Top set size: {self.topSetSize}")
+        print(f"number of sets: {self.sets}")
+        print("===============\n")
 
     def checkFlush(self, cards):
         """if exists >= 5 suited cards

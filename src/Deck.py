@@ -23,7 +23,19 @@ class Deck:
         return str
 
     def __getitem__(self, n):
-        return self.card(n)
+        """returns the requested Cards as a list"""
+        if isinstance(n,int):
+            if len(self) < n+1:
+                raise IndexError
+            else: return [self.card(n)]
+
+        list = []
+        for i in n:
+            if len(self) < i+1:
+                raise IndexError
+            else:
+                list.append(self.card(i))
+        return list
 
     def __iter__(self):
         self.current_index = 0
@@ -52,9 +64,3 @@ class Deck:
 
 if __name__ == '__main__':
     dk = Deck()
-    dk.printGrid(13)
-    for i in range(3):
-        dk.shuffle()
-        print()
-        print()
-        dk.printGrid(13)
