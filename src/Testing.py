@@ -1,5 +1,6 @@
 import Deck
 import Hand
+import CardPrinter
 
 def testFlush():
     dk = Deck.Deck()
@@ -23,12 +24,36 @@ def testSort():
             dk.shuffle()
             print("UNSORTED")
             hand = Hand.Hand(dk[0:s])
-            print(hand)
+            hand.checkFlush()
+            print(hand.tempCards)
             print("\nSORTED")
             hand.sortHand()
             print(hand)
             print("==========================================")
 
+def checkFlushOrder():
+    dk = Deck.Deck()
+    for i in range(1000):
+        dk.shuffle()
+        hd0 = Hand.Hand(dk[0:8])
+        hd0.checkFlush(hd0.cards)
+        if hd0.flush:
+            print("==============")
+            print("unsorted flush")
+            print(CardPrinter.rowStr(hd0.tempCards))
+
+        hd1 = Hand.Hand(dk[0:8])
+        hd1.sortHand()
+        hd1.checkFlush(hd1.cards)
+        if hd1.flush:
+            print("sorted flush")
+            print(CardPrinter.rowStr(hd1.tempCards))
+
+
+
+
+
+
 if __name__ == '__main__':
 
-    testSort()
+    checkFlushOrder()

@@ -107,10 +107,6 @@ class Hand:
             self.tempCards = newCards
 
 
-    #     if there doesnt exits a count >= 5
-    #         set flush to False
-    #     remove the non suited cards
-    #     set flush to True
 
 
 
