@@ -17,25 +17,26 @@ class Deck:
         return len(self.__cards)
 
     def __str__(self):
-        str = ''
-        for i in range(len(self)):
-            str += f"{self.__cards[i]}"
-        return str
+        return CardPrinter.gridStr(self.__cards,13)
 
     def __getitem__(self, n):
         """returns the requested Cards as a list"""
         if isinstance(n,int):
             if len(self) < n+1:
                 raise IndexError
-            else: return [self.card(n)]
-
-        list = []
-        for i in n:
-            if len(self) < i+1:
-                raise IndexError
             else:
-                list.append(self.card(i))
-        return list
+                return self.card(n+1)
+        if isinstance(n, list):
+            ls = []
+            for i in n:
+                if len(self) < i+1:
+                    raise IndexError
+                else:
+                    ls.append(self.card(i))
+            return ls
+        if isinstance(n, slice):
+            start, stop, step = n.indices(len(self))
+            return [self[i] for i in range(start, stop, step)]
 
     def __iter__(self):
         self.current_index = 0

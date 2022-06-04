@@ -1,7 +1,12 @@
+import Hand
 import Deck
-import CardPrinter
 
 dk = Deck.Deck()
-# card(self, n)
-print(dk.card(1))
-dk.printGrid(13)
+dk.shuffle()
+
+hd = Hand.Hand(dk[0:5])
+print(hd)
+print("\n\n")
+
+hd.sortHand()
+print(hd)

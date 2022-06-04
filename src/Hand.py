@@ -22,6 +22,19 @@ class Hand:
     def __str__(self):
         return CardPrinter.rowStr(self.cards)
 
+    def __getitem__(self, n):
+        """returns the requested Card from the hand"""
+        if len(self) < n+1:
+            raise IndexError
+        else:
+            return self.cards[n]
+
+    def __setitem__(self, key, value):
+        if not isinstance(key,int):
+            raise TypeError
+        self.cards[key] = value
+
+
     def getNames(self, cards):
         str = ''
         for i in cards:
@@ -44,14 +57,25 @@ class Hand:
     def sortHand(self):
         """Sorts the cards in the hand
           'a' is set as highest"""
-        self.sortingHand()
+        self.sortingHand(0,0,0)
 
-    def sortingHand(self,i,highCard):
-        if i > len(self): return
-        if self[i] > highCard:
-            newHighCard = self[i]
-            self[i] = highCard
-            self.sortingHand(i+1,newHighCard)
+    def sortingHand(self, pos, scan, highPos):
+        # the cards are sorted
+        if (pos+1) >= len(self):
+            return
+        # stores the highest card found to the first position
+        elif scan >= len(self):
+            tempCard = self[pos]
+            self[pos] = self[highPos]
+            self[highPos] = tempCard
+            self.sortingHand(pos+1, pos+1, pos+1)
+        # the scan finds a higher card and stores it
+        elif self[scan] > self[highPos]:
+            highPos = scan
+            self.sortingHand(pos, scan+1, highPos)
+        else:
+            self.sortingHand(pos, scan+1, highPos)
+
 
 
     def checkFlush(self, cards):
@@ -102,5 +126,8 @@ if __name__ == '__main__':
     cards = [card0, card1, card2, card3, card4, card5, card6]
 
     hand = Hand(cards)
+
     hand.checkFlush(hand.tempCards)
+    print(hand)
+    hand.sortHand()
     print(hand)

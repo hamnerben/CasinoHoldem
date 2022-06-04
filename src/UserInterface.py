@@ -1,7 +1,7 @@
 import Deck
 import Hand
 
-def runTests():
+def testFlush():
     dk = Deck.Deck()
     for i in range(50):
         dk.shuffle()
@@ -16,6 +16,19 @@ def runTests():
         print(p1Hand.getNames(bigHand))
         p1Hand.state()
 
+def testSort():
+    dk = Deck.Deck()
+    for s in range(4,15):
+        for i in range(10):
+            dk.shuffle()
+            print("UNSORTED")
+            hand = Hand.Hand(dk[0:s])
+            print(hand)
+            print("\nSORTED")
+            hand.sortHand()
+            print(hand)
+            print("==========================================")
+
 if __name__ == '__main__':
 
-    runTests()
+    testSort()
