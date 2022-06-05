@@ -52,8 +52,6 @@ def checkFlushOrder():
 
 
 
-
-
 if __name__ == '__main__':
 
     checkFlushOrder()

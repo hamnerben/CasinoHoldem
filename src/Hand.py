@@ -81,7 +81,8 @@ class Hand:
     def checkFlush(self, cards):
         """if exists >= 5 suited cards
         stores True on hand for flush
-        and puts suited cards first in tempCards, with unsuited cards after"""
+        and puts suited cards first in tempCards, with unsuited cards after
+        suited cards are marked as used"""
 
         newCards = []
         suitsCount = {'clubs': 0, 'spades': 0, 'hearts': 0, 'diamonds': 0}
@@ -100,12 +101,33 @@ class Hand:
             for card in cards:
                 if card.getSuit() == flushSuit:
                     newCards.append(card)
+                    card.setUsed()  # set the flush cards as used
             # append all the unsuited cards after
             for card in cards:
                 if card.getSuit() != flushSuit:
                     newCards.append(card)
             self.tempCards = newCards
 
+    def checkStraight(self, cards):
+        """if straight of >=5 cards exists
+          stores them in tempCards
+          puts straight cards first in descending order
+          sets straight to True
+          marks straight cards as used"""
+        self.straight = False
+        ace = False
+        two = False
+        hd = Hand(cards)  # this isn't ideal but I need to make a Hand object
+        hd.sortHand()     # in order to sort the cards
+        sorted = hd.cards
+        straightCards = []
+        for i in range(len(sorted)):
+            straightCards.append(sorted[i])
+            if sorted[i].val == 'a':
+                ace = True
+            if sorted[i].val == '2':
+                twoAce = True
+            if sorted
 
 
 

@@ -1,3 +1,6 @@
+import Deck
+
+
 class Card:
 
     VALUES = ['2','3','4','5','6','7','8','9','10','j','q','k','a']
@@ -57,10 +60,9 @@ class Card:
                 ('hearts', '2'): [' _____ ', '|2    |', '|  v  |', '|     |', '|  v  |', '|____Z|']}
 
     def __init__(self, value, suit):
-
         self.val = value
         self.suit = suit
-        self.used = False
+        self.used = 0
         if (suit, value) in self.ASCIIS:
             self.ascii = self.ASCIIS[(suit, value)]
 
@@ -79,15 +81,18 @@ class Card:
     def __lt__(self, other):
         return (self.VALUES.index(self.val) < other.VALUES.index(other.val))
 
+    def getValInt(self):
+        return self.VALUES.index(self.val) + 2
+
     def getVal(self): return self.val
 
     def getSuit(self): return self.suit
 
-    def isUsed(self): return self.used
+    def used(self): return self.used
 
-    def setUsed(self): self.used = True
+    def setUsed(self): self.used += 1
 
-    def setNotUsed(self): self.used = False
+    def setNotUsed(self): self.used = 0
 
     def art(self):
         str = ''
@@ -97,4 +102,9 @@ class Card:
 
 if __name__ == '__main__':
 
-   print(Card('2','spades') > Card('a','hearts'))
+   dk = Deck.Deck()
+   for i in range(52):
+       print("+++++++")
+       card = dk[i]
+       print(card)
+       print(card.getValInt())
