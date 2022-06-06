@@ -145,8 +145,6 @@ class Hand:
                 straightCards.append(next)
                 next.setUsed()
 
-
-
         # if low ace would contribute to a straight, add aces if present
         for card in straightCards:
             if card.getVal() == '2':
@@ -156,7 +154,7 @@ class Hand:
         if straightCards:
             firstCVal = straightCards[0].getValInt()
             lastCVal = straightCards[-1].getValInt()
-            if firstCVal - lastCVal >= 4:
+            if (firstCVal - lastCVal) >= 4:
                 self.__straightExists(straightCards, sorted)
                 return
         else:

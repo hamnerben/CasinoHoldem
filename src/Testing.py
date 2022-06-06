@@ -1,6 +1,8 @@
+import Card
 import Deck
 import Hand
 import CardPrinter
+import random
 
 def testFlush():
     dk = Deck.Deck()
@@ -57,15 +59,36 @@ def testStraight():
         hd.sortHand()
         str1 = str(hd)
         hd.checkStraight(dk[0:7])
-        print("=================================================")
         if hd.straight:
+            print("=================================================")
             print("!!!!!!!!!!\n!!!!!!!!!!\n!!!!!!!!!!!")
-        print("--sorted HAND--")
-        print(str1)
-        print("--straightened--")
-        print(CardPrinter.rowStr(hd.tempCards))
+            print("--sorted HAND--")
+            print(str1)
+            print("--straightened--")
+            print(CardPrinter.rowStr(hd.tempCards))
+        ran = random.random()
+        if ran < 0.1:
+            print("=================================================")
+            print("--sorted HAND--")
+            print(str1)
+            print("--straightened--")
+            print(CardPrinter.rowStr(hd.tempCards))
+
+def testStraightSpecific():
+    c1 = Card.Card('a','spades')
+    c2 = Card.Card('j','diamonds')
+    c3 = Card.Card('k','hearts')
+    c4 = Card.Card('5','hearts')
+    c5 = Card.Card('4','hearts')
+    c6 = Card.Card('3','hearts')
+    c7 = Card.Card('2','hearts')
+    hd = Hand.Hand([c1,c2,c3,c4,c5,c6,c7])
+    print(hd)
+    hd.checkStraight(hd.cards)
+    print(CardPrinter.rowStr(hd.tempCards))
+    print(hd.state())
 
 
 if __name__ == '__main__':
 
-    testStraight()
+    testStraightSpecific()
