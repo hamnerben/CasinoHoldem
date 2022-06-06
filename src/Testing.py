@@ -49,9 +49,23 @@ def checkFlushOrder():
             print("sorted flush")
             print(CardPrinter.rowStr(hd1.tempCards))
 
-
+def testStraight():
+    dk = Deck.Deck()
+    for i in range(1000):
+        dk.shuffle()
+        hd = Hand.Hand(dk[0:7])
+        hd.sortHand()
+        str1 = str(hd)
+        hd.checkStraight(dk[0:7])
+        print("=================================================")
+        if hd.straight:
+            print("!!!!!!!!!!\n!!!!!!!!!!\n!!!!!!!!!!!")
+        print("--sorted HAND--")
+        print(str1)
+        print("--straightened--")
+        print(CardPrinter.rowStr(hd.tempCards))
 
 
 if __name__ == '__main__':
 
-    checkFlushOrder()
+    testStraight()

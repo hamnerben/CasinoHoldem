@@ -81,6 +81,18 @@ class Card:
     def __lt__(self, other):
         return (self.VALUES.index(self.val) < other.VALUES.index(other.val))
 
+    def __add__(self, other):
+        if isinstance(other, int):
+            return self.getValInt() + other
+        else:
+            raise NotImplementedError
+
+    def __sub__(self, other):
+        if isinstance(other, int):
+            return self.getValInt() - other
+        else:
+            raise NotImplementedError
+
     def getValInt(self):
         return self.VALUES.index(self.val) + 2
 
@@ -103,8 +115,7 @@ class Card:
 if __name__ == '__main__':
 
    dk = Deck.Deck()
-   for i in range(52):
-       print("+++++++")
-       card = dk[i]
-       print(card)
-       print(card.getValInt())
+   card = dk[0]
+   print(card)
+   print(card.getValInt())
+   print(card+0)

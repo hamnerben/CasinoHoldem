@@ -115,19 +115,72 @@ class Hand:
           sets straight to True
           marks straight cards as used"""
         self.straight = False
-        ace = False
-        two = False
-        hd = Hand(cards)  # this isn't ideal but I need to make a Hand object
+        aces = []
+        hd = Hand(cards)  # this isn't ideal, but I need to make a Hand object
         hd.sortHand()     # in order to sort the cards
         sorted = hd.cards
         straightCards = []
-        for i in range(len(sorted)):
-            straightCards.append(sorted[i])
-            if sorted[i].val == 'a':
-                ace = True
-            if sorted[i].val == '2':
-                twoAce = True
-            if sorted
+        for i in range(1,len(sorted)):
+            current = sorted[i-1]
+            next = sorted[i]
+            straightCards.append(current)
+            current.setUsed()
+            if current.getVal() == 'a':
+                aces.append(current)
+            # if the next card is NOT one step down or equal to the current card
+            if not current.getValInt() == next+1 or current.getValInt() == next.getValInt():
+                # there exists a straight
+                firstCVal = straightCards[0].getValInt()
+                lastCVal = straightCards[-1].getValInt()
+                if firstCVal - lastCVal >= 4:
+                    self.__straightExists(straightCards, sorted)
+                    return
+                # reset the straight card collection
+                for card in straightCards:
+                    card.setNotUsed()
+                straightCards = []
+                continue
+            # if it's the last iteration add next card
+            if i+1 == len(sorted):
+                straightCards.append(next)
+                next.setUsed()
+
+
+
+        # if low ace would contribute to a straight, add aces if present
+        for card in straightCards:
+            if card.getVal() == '2':
+                for c in aces:
+                    straightCards.append(c)
+        # there exists a straight
+        if straightCards:
+            firstCVal = straightCards[0].getValInt()
+            lastCVal = straightCards[-1].getValInt()
+            if firstCVal - lastCVal >= 4:
+                self.__straightExists(straightCards, sorted)
+                return
+        else:
+            self.straight = False
+
+
+
+    def __straightExists(self,straightCards,sorted):
+        # there exists a straight
+        self.straight = True
+        self.tempCards = []
+        # append all the straight cards first
+        for card in sorted:
+            if card in straightCards:
+                self.tempCards.append(card)
+        # append all the non-straight cards
+        for card in sorted:
+            if card not in straightCards:
+                self.tempCards.append(card)
+        return
+
+
+
+
 
 
 
