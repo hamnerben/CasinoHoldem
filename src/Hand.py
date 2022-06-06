@@ -57,9 +57,9 @@ class Hand:
     def sortHand(self):
         """Sorts the cards in the hand
           'a' is set as highest"""
-        self.sortingHand(0,0,0)
+        self.__sortingHand(0,0,0)
 
-    def sortingHand(self, pos, scan, highPos):
+    def __sortingHand(self, pos, scan, highPos):
         # the cards are sorted
         if (pos+1) >= len(self):
             return
@@ -68,13 +68,13 @@ class Hand:
             tempCard = self[pos]
             self[pos] = self[highPos]
             self[highPos] = tempCard
-            self.sortingHand(pos+1, pos+1, pos+1)
+            self.__sortingHand(pos+1, pos+1, pos+1)
         # the scan finds a higher card and stores it
         elif self[scan] > self[highPos]:
             highPos = scan
-            self.sortingHand(pos, scan+1, highPos)
+            self.__sortingHand(pos, scan+1, highPos)
         else:
-            self.sortingHand(pos, scan+1, highPos)
+            self.__sortingHand(pos, scan+1, highPos)
 
 
 
@@ -128,7 +128,7 @@ class Hand:
             if current.getVal() == 'a':
                 aces.append(current)
             # if the next card is NOT one step down or equal to the current card
-            if not current.getValInt() == next+1 or current.getValInt() == next.getValInt():
+            if not (current.getValInt() == next+1 or current.getValInt() == next.getValInt()):
                 # there exists a straight
                 firstCVal = straightCards[0].getValInt()
                 lastCVal = straightCards[-1].getValInt()
@@ -154,6 +154,8 @@ class Hand:
         if straightCards:
             firstCVal = straightCards[0].getValInt()
             lastCVal = straightCards[-1].getValInt()
+            if lastCVal == 14:  # if the ace is at the end, it's a 1 not 14
+                lastCVal = 1
             if (firstCVal - lastCVal) >= 4:
                 self.__straightExists(straightCards, sorted)
                 return
@@ -167,9 +169,8 @@ class Hand:
         self.straight = True
         self.tempCards = []
         # append all the straight cards first
-        for card in sorted:
-            if card in straightCards:
-                self.tempCards.append(card)
+        for card in straightCards:
+            self.tempCards.append(card)
         # append all the non-straight cards
         for card in sorted:
             if card not in straightCards:
