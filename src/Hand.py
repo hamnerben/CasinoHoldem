@@ -177,7 +177,27 @@ class Hand:
                 self.tempCards.append(card)
         return
 
-
+    def checkRoyal(self, cards):
+        """Checks if every royal card is present"""
+        royalCards = []
+        royalCnt = {'a': 0, 'k': 0, 'q': 0, 'j': 0, '10': 0}
+        hand = Hand(cards)
+        hand.sortHand()
+        sorted = hand.cards
+        for card in sorted:
+            if card.getVal() in royalCnt:
+                royalCnt[card.getVal()] += 1
+                card.setUsed()
+                royalCards.append(card)
+        self.royal = True
+        for key in royalCnt:
+            if royalCnt[key] < 1:
+                self.royal = False
+        if self.royal:
+            self.tempCards = royalCards
+            for card in sorted:
+                if card not in royalCards:
+                    self.tempCards.append(card)
 
 
 

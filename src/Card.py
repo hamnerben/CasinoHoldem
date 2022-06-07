@@ -73,7 +73,7 @@ class Card:
         return self.art()
 
     def __eq__(self, other):
-        return (self.val == other.val)
+        return (self.val == other.val and self.suit == other.suit)
 
     def __ge__(self, other):
         return (self.VALUES.index(self.val) <= other.VALUES.index(other.val))

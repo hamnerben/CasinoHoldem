@@ -37,19 +37,16 @@ def checkFlushOrder():
     dk = Deck.Deck()
     for i in range(1000):
         dk.shuffle()
-        hd0 = Hand.Hand(dk[0:8])
+        hd0 = Hand.Hand(dk[0:7])
+        string = str(hd0)
         hd0.checkFlush(hd0.cards)
         if hd0.flush:
             print("==============")
             print("unsorted flush")
+            print(string)
+            print("sorted flush")
             print(CardPrinter.rowStr(hd0.tempCards))
 
-        hd1 = Hand.Hand(dk[0:8])
-        hd1.sortHand()
-        hd1.checkFlush(hd1.cards)
-        if hd1.flush:
-            print("sorted flush")
-            print(CardPrinter.rowStr(hd1.tempCards))
 
 def testStraight():
     dk = Deck.Deck()
@@ -76,12 +73,28 @@ def testStraight():
         #     print(CardPrinter.rowStr(hd.tempCards))
         #     print(f"Straight: {hd.straight}")
 
+def makeHand(dk,amount):
+    dk.shuffle()
+    hd = Hand.Hand(dk[0:amount])
+    return hd
+
+def makeSpecificHand():
+    c1 = Card.Card('a', 'hearts')
+    c2 = Card.Card('k', 'diamonds')
+    c3 = Card.Card('q', 'diamonds')
+    c4 = Card.Card('j', 'diamonds')
+    c5 = Card.Card('10', 'spades')
+    c6 = Card.Card('9', 'spades')
+    c7 = Card.Card('9', 'clubs')
+    hd = Hand.Hand([c1, c2, c3, c4, c5, c6, c7])
+    return hd
+
 def testStraightSpecific():
     c1 = Card.Card('a','spades')
     c2 = Card.Card('j','diamonds')
-    c3 = Card.Card('4','hearts')
-    c4 = Card.Card('5','hearts')
-    c5 = Card.Card('5','spades')
+    c3 = Card.Card('10','hearts')
+    c4 = Card.Card('q','hearts')
+    c5 = Card.Card('10','spades')
     c6 = Card.Card('3','hearts')
     c7 = Card.Card('2','hearts')
     hd = Hand.Hand([c1,c2,c3,c4,c5,c6,c7])
@@ -92,6 +105,27 @@ def testStraightSpecific():
     print(hd.state())
 
 
+def testRoyal():
+    dk = Deck.Deck()
+    for i in range(100000):
+        hd = makeHand(dk, 7)
+        hd.sortHand()
+        # string = str(hd)
+        hd.checkRoyal(hd.tempCards)
+        if hd.royal:
+            # print("========================")
+            # print("--RAW HAND--")
+            # print(string)
+            print("--ROYAL HAND--")
+            print(CardPrinter.rowStr(hd.tempCards))
+
+
+def testSpecificthing():
+    hd = makeSpecificHand()
+    print(hd)
+    hd.checkRoyal(hd.tempCards)
+    print(CardPrinter.rowStr(hd.tempCards))
+
 if __name__ == '__main__':
 
-    testStraight()
+    checkFlushOrder()
