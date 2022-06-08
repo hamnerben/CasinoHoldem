@@ -13,6 +13,7 @@ class Hand:
         self.straight = False
         self.royal = False
         self.topSetSize = 0
+        self.numSets = 0
         self.sets = {}
         # handName = self.determineHand()
 
@@ -203,19 +204,37 @@ class Hand:
         '''counts the sets and set size in the hand
           stores sets in a list of tuples (<setsize>,<card>)
           stores the cards ordered from highest set size in tempCards'''
-        valCnts = {'2':0,'3':0,'4':0,'5':0,'6':0,'7':0,'8':0,'9':0,'10':0,'j':0,'q':0,'k':0,'a':0}
+        valCnts = {2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0}
+        hd = Hand(cards)
+        hd.sortHand()
+        cards = hd.cards
         for card in cards:
-            valCnts[card.getVal()] += 1
+            valCnts[card.getValInt()] += 1
             if card.getVal() not in self.sets:
                 self.sets[card.getVal()] = []
             self.sets[card.getVal()].append(card)
-        self.topSetSize = valCnts[max(valCnts,key=valCnts.get)]
-        
-        for key in valCnts:
+        self.topSetSize = valCnts[max(valCnts, key=valCnts.get)]
 
+        # sort the cards to store in tempCards
+        if self.topSetSize > 1:
+            self.tempCards = []
+            self.numSets = 0
+            for key in valCnts:
+                maxSize = valCnts[max(valCnts, key=valCnts.get)]
+                maxSets = []
+                for key in self.sets:
+                    if len(self.sets[key]) == maxSize:
+                        maxSets.append(self.sets[key])
+                        if maxSize > 1:
+                            self.numSets += 1
+                for key in valCnts:
+                    if valCnts[key] == maxSize:
+                        valCnts[key] = -1
+                maxSets.sort(reverse=True)
+                for list in maxSets:
+                    for i in list:
+                        self.tempCards.append(i)
 
-        print(self.sets)
-        print(self.topSetSize)
 
 
 if __name__ == '__main__':
@@ -223,7 +242,7 @@ if __name__ == '__main__':
     card1 = Card('4', 'diamonds')
     card2 = Card('5', 'clubs')
     card3 = Card('5', 'hearts')
-    card4 = Card('5', 'spades')
+    card4 = Card('8', 'spades')
     card5 = Card('8', 'hearts')
     card6 = Card('9', 'hearts')
 

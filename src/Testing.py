@@ -121,11 +121,27 @@ def testRoyal():
 
 
 def testSpecificthing():
-    hd = makeSpecificHand()
+    dk = Deck.Deck()
+    hd = makeHand(dk, 7)
+    print("=================================================")
+    print("=================================================")
     print(hd)
-    hd.checkRoyal(hd.tempCards)
+    hd.countSets(hd.tempCards)
     print(CardPrinter.rowStr(hd.tempCards))
 
-if __name__ == '__main__':
+def testCountSets():
+    dk = Deck.Deck()
+    hd = makeHand(dk, 7)
+    string = str(hd)
+    hd.countSets(hd.tempCards)
+    if hd.topSetSize > 2 and hd.numSets > 1:
+        print("=================================================")
+        print("=================================================")
+        print(string)
+        print(CardPrinter.rowStr(hd.tempCards))
+        print(f"TopSetSize: {hd.topSetSize}")
+        print(f"numSets: {hd.numSets}")
 
-    checkFlushOrder()
+if __name__ == '__main__':
+    for i in range(1000):
+        testCountSets()
