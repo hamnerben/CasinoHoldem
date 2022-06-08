@@ -79,21 +79,21 @@ def makeHand(dk,amount):
     return hd
 
 def makeSpecificHand():
-    c1 = Card.Card('a', 'hearts')
-    c2 = Card.Card('k', 'diamonds')
-    c3 = Card.Card('q', 'diamonds')
-    c4 = Card.Card('j', 'diamonds')
-    c5 = Card.Card('10', 'spades')
-    c6 = Card.Card('9', 'spades')
-    c7 = Card.Card('9', 'clubs')
+    c1 = Card.Card('4', 'hearts')
+    c2 = Card.Card('2', 'diamonds')
+    c3 = Card.Card('2', 'spades')
+    c4 = Card.Card('10', 'clubs')
+    c5 = Card.Card('3', 'spades')
+    c6 = Card.Card('5', 'spades')
+    c7 = Card.Card('a', 'clubs')
     hd = Hand.Hand([c1, c2, c3, c4, c5, c6, c7])
     return hd
 
 def testStraightSpecific():
     c1 = Card.Card('a','spades')
-    c2 = Card.Card('j','diamonds')
-    c3 = Card.Card('10','hearts')
-    c4 = Card.Card('q','hearts')
+    c2 = Card.Card('a','diamonds')
+    c3 = Card.Card('a','hearts')
+    c4 = Card.Card('a','clubs')
     c5 = Card.Card('10','spades')
     c6 = Card.Card('3','hearts')
     c7 = Card.Card('2','hearts')
@@ -122,12 +122,11 @@ def testRoyal():
 
 def testSpecificthing():
     dk = Deck.Deck()
-    hd = makeHand(dk, 7)
+    hd = makeSpecificHand()
     print("=================================================")
     print("=================================================")
     print(hd)
-    hd.countSets(hd.tempCards)
-    print(CardPrinter.rowStr(hd.tempCards))
+    print(CardPrinter.rowStr(hd.isStraight(hd.cards)))
 
 def testCountSets():
     dk = Deck.Deck()
@@ -142,6 +141,41 @@ def testCountSets():
         print(f"TopSetSize: {hd.topSetSize}")
         print(f"numSets: {hd.numSets}")
 
+def testRoyalFlush():
+    dk = Deck.Deck()
+    found = 0
+    loop = 1000
+    for i in range(loop):
+        hd = makeHand(dk, 7)
+        string = str(hd)
+        x = hd.isFullHouse(hd.cards)
+        if x:
+            found += 1
+            print("=================================================")
+            print("=================================================")
+            print("--ORIGINAL HAND--")
+            print(string)
+            print("--Four of a kind--")
+            print(CardPrinter.rowStr(x))
+
+    print("XXXXXXXXXXXXXXXXXXXXX")
+    print(f"found {found}/{loop}")
+    print("XXXXXXXXXXXXXXXXXXXXX")
+
+def testFourofAKind():
+    hd = makeSpecificHand()
+    print(hd)
+    print(CardPrinter.rowStr(hd.isFourofAKind(hd.cards)))
+
+def testFlush():
+    dk = Deck.Deck()
+    hd = makeHand(dk,7)
+    string = str(hd)
+    x = hd.isStraight(hd.cards)
+    if x:
+        print("==============================================")
+        print(string)
+        print(CardPrinter.rowStr(x))
+
 if __name__ == '__main__':
-    for i in range(1000):
-        testCountSets()
+    testSpecificthing()

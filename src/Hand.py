@@ -1,4 +1,5 @@
 import CardPrinter
+import Deck
 from Card import Card
 from CardPrinter import rowStr
 
@@ -52,7 +53,7 @@ class Hand:
         print(f"Is Straight: {self.straight}")
         print(f"Is Royal: {self.royal}")
         print(f"Top set size: {self.topSetSize}")
-        print(f"number of sets: {self.sets}")
+        print(f"number of sets: {self.numSets}")
         print("===============\n")
 
     def sortHand(self):
@@ -84,7 +85,9 @@ class Hand:
         stores True on hand for flush
         and puts suited cards first in tempCards, with unsuited cards after
         suited cards are marked as used"""
-
+        hd = Hand(cards)
+        hd.sortHand()
+        cards = hd.cards
         newCards = []
         suitsCount = {'clubs': 0, 'spades': 0, 'hearts': 0, 'diamonds': 0}
         flushSuit = ''
@@ -235,19 +238,101 @@ class Hand:
                     for i in list:
                         self.tempCards.append(i)
 
+    def isRoyalFlush(self, cards):
+        for card in cards:
+            card.resetUsed()
+        self.checkRoyal(cards)
+        self.checkFlush(cards)
+        self.checkStraight(cards)
+        usedCards = []
+        for card in cards:
+            if card.getUsed() >= 3:
+                usedCards.append(card)
+        if len(usedCards) >= 5:
+            return usedCards[:5]
+        else:
+            return False
 
+    def isStraightFlush(self, cards):
+        for card in cards:
+            card.resetUsed()
+        self.checkFlush(cards)
+        self.checkStraight(cards)
+        usedCards = []
+        for card in cards:
+            if card.getUsed() >= 2:
+                usedCards.append(card)
+        if len(usedCards) >= 5:
+            return usedCards[:5]
+        else:
+            return False
+
+    def isFourofAKind(self,cards):
+        for card in cards:
+            card.resetUsed()
+        self.countSets(cards)
+        usedCards = []
+        if self.topSetSize == 4:
+            for i in range(4):
+                usedCards.append(self.tempCards.pop(0))
+            hd = Hand(self.tempCards)
+            hd.sortHand()
+            usedCards.append(self.tempCards[0])
+            return usedCards
+        else:
+            return False
+
+    def isFullHouse(self,cards):
+        for card in cards:
+            card.resetUsed()
+        self.countSets(cards)
+        usedCards = []
+        if self.topSetSize == 3 and self.numSets >= 2:
+            for i in range(5):
+                usedCards.append(self.tempCards[i])
+            return usedCards
+        else:
+            return False
+
+    def isFlush(self, cards):
+        for card in cards:
+            card.resetUsed()
+        self.checkFlush(cards)
+        usedCards = []
+        if self.flush:
+            for i in range(5):
+                usedCards.append(self.tempCards[i])
+            return usedCards
+        else:
+            return False
+
+    def isStraight(self, cards):
+        for card in cards:
+            card.resetUsed()
+        self.checkStraight(cards)
+        usedCards = []
+        if self.straight:
+            vals = set()
+            while len(usedCards) < 5:
+                if self.tempCards[0].getVal() not in vals:
+                    usedCards.append(self.tempCards[0])
+                    vals.add(self.tempCards.pop(0).getVal())
+            return usedCards
+        else:
+            return False
 
 if __name__ == '__main__':
-    card0 = Card('3', 'hearts')
-    card1 = Card('4', 'diamonds')
-    card2 = Card('5', 'clubs')
-    card3 = Card('5', 'hearts')
-    card4 = Card('8', 'spades')
+    import Testing
+    card0 = Card('k', 'hearts')
+    card1 = Card('q', 'hearts')
+    card2 = Card('10', 'hearts')
+    card3 = Card('j', 'hearts')
+    card4 = Card('a', 'hearts')
     card5 = Card('8', 'hearts')
     card6 = Card('9', 'hearts')
-
     cards = [card0, card1, card2, card3, card4, card5, card6]
-
     hand = Hand(cards)
 
-    hand.countSets(hand.cards)
+    dk = Deck.Deck()
+    hd = Testing.makeHand(dk, 7)
+    hand.isRoyalFlush(hand.cards)

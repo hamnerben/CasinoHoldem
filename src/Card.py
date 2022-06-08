@@ -100,7 +100,7 @@ class Card:
 
     def getSuit(self): return self.suit
 
-    def used(self): return self.used
+    def getUsed(self): return self.used
 
     def setUsed(self): self.used += 1
 
