@@ -104,7 +104,9 @@ class Card:
 
     def setUsed(self): self.used += 1
 
-    def setNotUsed(self): self.used = 0
+    def setNotUsed(self): self.used -= 1
+
+    def resetUsed(self): self.used = 0
 
     def art(self):
         str = ''

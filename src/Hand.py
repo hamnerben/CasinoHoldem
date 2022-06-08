@@ -13,7 +13,7 @@ class Hand:
         self.straight = False
         self.royal = False
         self.topSetSize = 0
-        self.sets = []
+        self.sets = {}
         # handName = self.determineHand()
 
     def __len__(self):
@@ -199,17 +199,31 @@ class Hand:
                 if card not in royalCards:
                     self.tempCards.append(card)
 
+    def countSets(self, cards):
+        '''counts the sets and set size in the hand
+          stores sets in a list of tuples (<setsize>,<card>)
+          stores the cards ordered from highest set size in tempCards'''
+        valCnts = {'2':0,'3':0,'4':0,'5':0,'6':0,'7':0,'8':0,'9':0,'10':0,'j':0,'q':0,'k':0,'a':0}
+        for card in cards:
+            valCnts[card.getVal()] += 1
+            if card.getVal() not in self.sets:
+                self.sets[card.getVal()] = []
+            self.sets[card.getVal()].append(card)
+        self.topSetSize = valCnts[max(valCnts,key=valCnts.get)]
+        
+        for key in valCnts:
 
 
-
+        print(self.sets)
+        print(self.topSetSize)
 
 
 if __name__ == '__main__':
     card0 = Card('3', 'hearts')
     card1 = Card('4', 'diamonds')
     card2 = Card('5', 'clubs')
-    card3 = Card('6', 'hearts')
-    card4 = Card('7', 'hearts')
+    card3 = Card('5', 'hearts')
+    card4 = Card('5', 'spades')
     card5 = Card('8', 'hearts')
     card6 = Card('9', 'hearts')
 
@@ -217,7 +231,4 @@ if __name__ == '__main__':
 
     hand = Hand(cards)
 
-    hand.checkFlush(hand.tempCards)
-    print(hand)
-    hand.sortHand()
-    print(hand)
+    hand.countSets(hand.cards)
