@@ -252,11 +252,10 @@ to use on `tempCards` for that reason a hand is passed in.
 
 
 ```python
-def countSets(self):
+def countSets(self, cards):
   '''counts the sets and set size in the hand
-  stores set count in hand dict
-  stores highest match number in hand
-  stores the cards ordered from highest set size in tempCards'''
+    stores sets in a list of tuples (<setsize>,<card>)
+    stores the cards ordered from highest set size in tempCards'''
     valCnts = {all the vals = 0}
     sets = 0
     cards = []
@@ -266,17 +265,17 @@ def countSets(self):
     for card in hand:
         if valCnt for val >= 3 store that card mark as used
     for card in hand:
-        if valCnt > 1 and not used: store that card and mark as used
+        if valCnt > 1 and not used: # store that card and mark as used
     for card in hand:
-        store the rest of the unmarked cards after the others
+        # store the rest of the unmarked cards after the others
     topCnt = 0
     for valCnt in valCnts:
-        get highest val
-        count the sets
-    store topCnt
-    store sets
-    store cards in tempCards
-    unmark the cards in hand
+    #     get highest val
+    #     count the sets
+    # store topCnt
+    # store sets
+    # store cards in tempCards
+    # unmark the cards in hand
 ```
 **What Happens with bad input?**
 * This method only works if the hand is passed in ordered.

@@ -13,7 +13,7 @@ class Hand:
         self.straight = False
         self.royal = False
         self.topSetSize = 0
-        self.sets = 0
+        self.sets = []
         # handName = self.determineHand()
 
     def __len__(self):
