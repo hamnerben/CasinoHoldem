@@ -148,14 +148,14 @@ def testRoyalFlush():
     for i in range(loop):
         hd = makeHand(dk, 7)
         string = str(hd)
-        x = hd.isFullHouse(hd.cards)
+        x = hd.isPair(hd.cards)
         if x:
             found += 1
             print("=================================================")
             print("=================================================")
             print("--ORIGINAL HAND--")
             print(string)
-            print("--Four of a kind--")
+            print("--two pair--")
             print(CardPrinter.rowStr(x))
 
     print("XXXXXXXXXXXXXXXXXXXXX")
@@ -177,5 +177,16 @@ def testFlush():
         print(string)
         print(CardPrinter.rowStr(x))
 
+
+def testhandName():
+    dk = Deck.Deck()
+    hd = makeHand(dk, 7)
+    print("=========================================")
+    print(hd)
+    x = hd.handName(hd.cards)
+    print(x[1])
+    print(CardPrinter.rowStr(x[0]))
+
 if __name__ == '__main__':
-    testSpecificthing()
+    for i in range(1000):
+        testhandName()

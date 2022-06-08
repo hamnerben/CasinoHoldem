@@ -18,6 +18,11 @@ class Hand:
         self.sets = {}
         # handName = self.determineHand()
 
+    def resetAttr(self):
+        self.numSets = 0
+        self.sets = {}
+        self.topSetSize = 0
+
     def __len__(self):
         return len(self.cards)
 
@@ -270,6 +275,7 @@ class Hand:
     def isFourofAKind(self,cards):
         for card in cards:
             card.resetUsed()
+        self.resetAttr()
         self.countSets(cards)
         usedCards = []
         if self.topSetSize == 4:
@@ -285,6 +291,7 @@ class Hand:
     def isFullHouse(self,cards):
         for card in cards:
             card.resetUsed()
+        self.resetAttr()
         self.countSets(cards)
         usedCards = []
         if self.topSetSize == 3 and self.numSets >= 2:
@@ -317,9 +324,91 @@ class Hand:
                 if self.tempCards[0].getVal() not in vals:
                     usedCards.append(self.tempCards[0])
                     vals.add(self.tempCards.pop(0).getVal())
+                else:
+                    self.tempCards.pop(0)
             return usedCards
         else:
             return False
+
+    def isTriple(self, cards):
+        """if three of kind exists returns three cards
+        and then the next two high cards. It will not try to return
+        a full house if present.
+        else: returns False"""
+        for card in cards:
+            card.resetUsed()
+        self.resetAttr()
+        self.countSets(cards)
+        usedCards = []
+        if self.topSetSize >= 3:
+            for i in range(3):
+                usedCards.append(self.tempCards.pop(0))
+            hd = Hand(self.tempCards)
+            hd.sortHand()
+            for i in range(2):
+                usedCards.append(hd[i])
+            return usedCards
+        else:
+            return False
+
+    def isTwoPair(self, cards):
+        for card in cards:
+            card.resetUsed()
+        self.resetAttr()
+        self.countSets(cards)
+        usedCards = []
+        if self.topSetSize == 2 and self.numSets >= 2:
+            for i in range(4):
+                usedCards.append(self.tempCards.pop(0))
+            hd = Hand(self.tempCards)
+            hd.sortHand()
+            usedCards.append(hd[0])
+            return usedCards
+        else:
+            return False
+
+    def isPair(self, cards):
+        """if pair exists returns two cards
+                and then the next 3 high cards. It will not try to return
+                a full house or two pair if present.
+                else: returns False"""
+        for card in cards:
+            card.resetUsed()
+        self.resetAttr()
+        self.countSets(cards)
+        usedCards = []
+        if self.topSetSize == 2:
+            for i in range(2):
+                usedCards.append(self.tempCards.pop(0))
+            hd = Hand(self.tempCards)
+            hd.sortHand()
+            for i in range(3):
+                usedCards.append(hd[i])
+            return usedCards
+        else:
+            return False
+
+    def handName(self, cards):
+        if self.isRoyalFlush(cards):
+            return self.isRoyalFlush(cards), 'Royal Flush'
+        elif self.isStraightFlush(cards):
+            return self.isStraightFlush(cards), 'Straight Flush'
+        elif self.isFourofAKind(cards):
+            return self.isFourofAKind(cards), 'Four of a Kind'
+        elif self.isFullHouse(cards):
+            return self.isFullHouse(cards), 'Full House'
+        elif self.isFlush(cards):
+            return self.isFlush(cards), 'Flush'
+        elif self.isStraight(cards):
+            return self.isStraight(cards), 'Straight'
+        elif self.isTriple(cards):
+            return self.isTriple(cards), 'Three of a Kind'
+        elif self.isTwoPair(cards):
+            return self.isTwoPair(cards), 'Two Pair'
+        elif self.isPair(cards):
+            return self.isPair(cards), 'Pair'
+        else:
+            return cards[:5], 'High Card'
 
 if __name__ == '__main__':
     import Testing
