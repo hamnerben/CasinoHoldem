@@ -388,7 +388,7 @@ class Hand:
         else:
             return False
 
-    def handName(self, cards):
+    def determineHand(self, cards):
         if self.isRoyalFlush(cards):
             return self.isRoyalFlush(cards), 'Royal Flush'
         elif self.isStraightFlush(cards):
@@ -409,6 +409,7 @@ class Hand:
             return self.isPair(cards), 'Pair'
         else:
             return cards[:5], 'High Card'
+
 
 if __name__ == '__main__':
     import Testing

@@ -183,10 +183,31 @@ def testhandName():
     hd = makeHand(dk, 7)
     print("=========================================")
     print(hd)
-    x = hd.handName(hd.cards)
+    x = hd.determineHand(hd.cards)
     print(x[1])
     print(CardPrinter.rowStr(x[0]))
 
+def countHands(iterations):
+    dk = Deck.Deck()
+    dict = {}
+    for i in range(iterations):
+        if i % 10000 == 0:
+            print(i)
+        hd = makeHand(dk, 5)
+        name = hd.determineHand(hd.cards)[1]
+        if name in dict:
+            dict[name] += 1
+        else:
+            dict[name] = 1
+    print(f"{iterations} iterations\n")
+    list = []
+    for key in dict:
+        list.append((dict[key],key))
+    list.sort()
+    for i in list:
+        print(i)
+
+
 if __name__ == '__main__':
-    for i in range(1000):
+    for i in range(100):
         testhandName()
