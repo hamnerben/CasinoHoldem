@@ -3,6 +3,7 @@ import Deck
 import Hand
 import CardPrinter
 import random
+import Prompt
 
 def testFlush():
     dk = Deck.Deck()
@@ -209,5 +210,7 @@ def countHands(iterations):
 
 
 if __name__ == '__main__':
-    for i in range(100):
-        testhandName()
+    blank = Card.Card('blank', 'blank')
+    dk = Deck.Deck()
+    table = dk[0:3] + [blank, blank]
+    Prompt.printTable([blank, blank], table, dk[3:5])

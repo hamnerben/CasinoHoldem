@@ -2,7 +2,8 @@ import Card
 import Deck
 import math
 
-def rowStr(cards):
+def rowStr(cards,bufferSpace=0):
+    begSpace = bufferSpace * ' '
     for obj in cards:
         if not isinstance(obj, Card.Card):
             raise TypeError(f"Expected Card object but received {type(obj)}")
@@ -12,7 +13,7 @@ def rowStr(cards):
             longestCard = len(card)
     str = ''
     for l in range(longestCard):
-        maxLine = 0
+        str += begSpace
         for card in cards:
             if len(card) > l:
                 str += card.ascii[l]
