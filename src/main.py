@@ -41,29 +41,34 @@ def rounds(dk, hd, pMoney):
             pMoney.call()
             pHand = hd.determineHand(player + river)
             hHand = hd.determineHand(house + river)
-            # win
-            if hd.doesWin(player + river, house + river):
-                pMoney.win(pHand[1])
-                Prompt.printTable(house, river, player, "WIN!")
-                result_ur = Prompt.result(pMoney,'you',pHand)
-
-            # lose
+            # house qualifies with pair 4s
+            if hd.doesQualify(hHand[0]):
+                # win
+                if hd.doesWin(player + river, house + river):
+                    pMoney.win(pHand[1])
+                    Prompt.printTable(house, river, player, "WIN!")
+                    result_ur = Prompt.result(pMoney,'you',pHand)
+                # lose
+                else:
+                    Prompt.printTable(house, river, player, "LOSE")
+                    result_ur = Prompt.result(pMoney, 'the house', hHand)
+            # the house doesn't qualify
             else:
-                Prompt.printTable(house, river, player, "LOSE")
-                result_ur = Prompt.result(pMoney, 'the house', hHand)
-
+                pMoney.noQualify()
+                Prompt.printTable(house,river, player)
+                Prompt.result(pMoney,qualify=False)
+        # fold
         elif ur == 'f':
             Prompt.printTable(house, river, player, "FOLD")
             result_ur = Prompt.result(pMoney)
-
+        # continue
         if result_ur == 'c':
             continue
-
+        # exit to main menu
         elif result_ur == 'x':
             mainMenu(pMoney)
-
-
-    # reveal - result
+        elif result_ur == 'a':
+            pMoney.setAnte(Prompt.newGame(pMoney.bal, pMoney.bal/10))
 
 if __name__ == '__main__':
     mainMenu()

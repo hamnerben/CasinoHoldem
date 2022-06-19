@@ -415,8 +415,9 @@ class Hand:
     def doesWin(self, player, other):
         pHand = self.determineHand(player)
         oHand = self.determineHand(other)
-        if pHand[1] == oHand[1]:
-            for i in range(pHand[1]):
+        if self.RANK.index(pHand[1]) == self.RANK.index(oHand[1]):
+            print(pHand[1])
+            for i in range(len(pHand[1])):
                 if pHand[1][i] == oHand[1][i]:
                     continue
                 else:
@@ -424,6 +425,9 @@ class Hand:
         else:
             return self.RANK.index(pHand[1]) > self.RANK.index(oHand[1])
 
+    def doesQualify(self, cards):
+        handTup = self.determineHand(cards)
+        return self.RANK.index(handTup[1]) >= 1 and handTup[0][0].getValInt() >= 4
 
 
 if __name__ == '__main__':

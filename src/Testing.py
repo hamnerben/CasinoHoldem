@@ -217,13 +217,15 @@ def winner(hd, hand1, hand2):
         print("==WINNER==")
     print(CardPrinter.rowStr(hand2))
 
-if __name__ == '__main__':
-    blank = Card.Card('blank', 'blank')
-    dk = Deck.Deck()
-    hd = Hand.Hand()
+def qualify(dk):
     for i in range(100):
         dk.shuffle()
-        house = [dk[0], dk[1]]
-        player = [dk[2], dk[3]]
-        table = dk[4:9]
-        winner(hd,table + house, table + player)
+        hd = Hand.Hand(dk[:5])
+        if not hd.doesQualify(hd.cards):
+            tup = hd.determineHand(hd.cards)
+            print(CardPrinter.rowStr(tup[0]))
+
+
+if __name__ == '__main__':
+    dk = Deck.Deck()
+    qualify(dk)

@@ -113,12 +113,14 @@ def action(money):
     ur = input(">").lower()
     return ur
 
-def result(money, winner='', handTup=''):
+def result(money, winner='', handTup='', qualify=True):
     print(f"Balance: ${money.bal}  Total Bet: $0")
     print(f"Ante: ${money.ante}")
     if winner:
-        print(f"\n{winner} won  with a {handTup[1]}")
+        print(f"\n{winner} won with a {handTup[1]}")
         print(CardPrinter.rowStr(handTup[0]))
+    elif not qualify:
+        print("\nThe house did not qualify, bets are pushed")
     print(f"\n(c)ontinue, e(x)it, (a)nte change")
     ur = input(">")
     if ur.lower() in ['c', 'x', 'a']:
