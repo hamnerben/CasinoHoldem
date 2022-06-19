@@ -1,6 +1,7 @@
 import CardPrinter
 
 def title():
+    """returns letter command obtained from user"""
     print("""
          .o88b.  .d8b.  .d8888. d888888b d8b   db  .d88b.      
         d8P  Y8 d8' `8b 88'  YP   `88'   888o  88 .8P  Y8.     
@@ -31,8 +32,9 @@ def title():
     while True:
         print("n - New Game")
         print("x - exit")
+        print("h - how to play")
         ur = input()
-        if ur.lower() in ['n', 'x']:
+        if ur.lower() in ['n', 'x', 'h']:
             return ur
         else:
             print()
@@ -43,6 +45,7 @@ def title():
             print()
 
 def newGame(balance, anteMax):
+    """returns ante amount from user input"""
     while True:
         print()
         print(f"Current balance: ${balance}")
@@ -84,6 +87,14 @@ _____________________________________________________________
     print(CardPrinter.rowStr(player, 11))
     print("_____________________________________________________________")
 
+def gameOver():
+    print("""   
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝""")
+
 if __name__ == '__main__':
-    title()
-    newGame(100.20, 30000)
+    gameOver()
