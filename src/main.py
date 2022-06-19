@@ -1,11 +1,14 @@
-import Hand
-import Deck
+import Prompt
+import Money
 
-dk = Deck.Deck()
-dk.shuffle()
+STARTING_BAL = 1000
 
-print(dk)
-print()
-for i in range(10):
-    dk.shuffle()
-    print(dk)
+ur = Prompt.title()
+if ur == 'x':
+    Prompt.thanks()
+elif ur == 'n':
+    ante = Prompt.newGame(STARTING_BAL, STARTING_BAL/10)
+
+playerMoney = Money.Money(STARTING_BAL,ante)
+
+
