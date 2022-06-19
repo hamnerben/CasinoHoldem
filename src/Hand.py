@@ -4,10 +4,11 @@ from Card import Card
 from CardPrinter import rowStr
 
 class Hand:
-    def __init__(self, cards):
+    def __init__(self, cards=[]):
         for obj in cards:
             if not isinstance(obj, Card):
                 raise TypeError(f"Expected Card object but received {type(obj)}")
+        self.RANK = ['High Card', 'Pair', 'Two Pair', 'Three of a Kind', 'Straight', 'Flush', 'Full House', 'Four of a Kind','Straight Flush','Royal Flush']
         self.cards = cards  # shouldn't be changed
         self.tempCards = cards
         self.flush = False
@@ -409,6 +410,20 @@ class Hand:
             return self.isPair(cards), 'Pair'
         else:
             return cards[:5], 'High Card'
+
+
+    def doesWin(self, player, other):
+        pHand = self.determineHand(player)
+        oHand = self.determineHand(other)
+        if pHand[1] == oHand[1]:
+            for i in range(pHand[1]):
+                if pHand[1][i] == oHand[1][i]:
+                    continue
+                else:
+                    return pHand[1][i] > oHand[1][i]
+        else:
+            return self.RANK.index(pHand[1]) > self.RANK.index(oHand[1])
+
 
 
 if __name__ == '__main__':

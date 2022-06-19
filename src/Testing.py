@@ -208,9 +208,22 @@ def countHands(iterations):
     for i in list:
         print(i)
 
+def winner(hd, hand1, hand2):
+    print("======================================================")
+    if hd.doesWin(hand1, hand2):
+        print("==WINNER==")
+    print(CardPrinter.rowStr(hand1))
+    if hd.doesWin(hand2, hand1):
+        print("==WINNER==")
+    print(CardPrinter.rowStr(hand2))
 
 if __name__ == '__main__':
     blank = Card.Card('blank', 'blank')
     dk = Deck.Deck()
-    table = dk[0:3] + [blank, blank]
-    Prompt.printTable([blank, blank], table, dk[3:5])
+    hd = Hand.Hand()
+    for i in range(100):
+        dk.shuffle()
+        house = [dk[0], dk[1]]
+        player = [dk[2], dk[3]]
+        table = dk[4:9]
+        winner(hd,table + house, table + player)

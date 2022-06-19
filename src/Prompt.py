@@ -1,6 +1,8 @@
+import sys
+
 import CardPrinter
 
-def title():
+def title(money=''):
     """returns letter command obtained from user"""
     print("""
          .o88b.  .d8b.  .d8888. d888888b d8b   db  .d88b.      
@@ -30,11 +32,15 @@ def title():
                 ⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠢⣤⣾⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀
                 ⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠁⠀⠀⠀⠀⠀⠀⠀""")
     while True:
+        options = ['n', 'x']
+        if money:
+            print(f"r - Resume Game  Balance: {money.bal}")
+            options = ['n', 'x', 'r']
         print("n - New Game")
-        print("x - exit")
-        print("h - how to play")
-        ur = input()
-        if ur.lower() in ['n', 'x', 'h']:
+        print("x - Exit")
+        # print("h - how to play")
+        ur = input(">")
+        if ur.lower() in options:
             return ur
         else:
             print()
@@ -53,13 +59,11 @@ def thanks():
   |  |  |  |  ||  _  ||  |  ||     \/  \ |    |   _] |     ||    \     |  |  |     ||  _  ||___, | |  | |  |  ||  |_ | __ 
   |  |  |  |  ||  |  ||  |  ||  .  |\    |    |  |   |     ||  .  \    |  |  |     ||  |  ||     | |  | |  |  ||     ||  |
   |__|  |__|__||__|__||__|__||__|\_| \___|    |__|    \___/ |__|\_|    |__|  |_____||__|__||____/ |____||__|__||___,_||__|""")
+    sys.exit(0)
 
 def newGame(balance, anteMax):
-<<<<<<< HEAD
     """returns ante amount from user input"""
-=======
     """returns an ante amount from the players choice"""
->>>>>>> 4f09008b40b0b815cb79b4152b9d722d2ecccb3b
     while True:
         print()
         print(f"Current balance: ${balance}")
@@ -72,7 +76,7 @@ def newGame(balance, anteMax):
             else:
                 print()
                 print("---------------------------------------------")
-                print("The ante must be [$1 - ${round(anteMax, 3)}]")
+                print(f"The ante must be [$1 - ${round(anteMax, 3)}]")
                 print("---------------------------------------------")
         else:
             print()
@@ -81,7 +85,7 @@ def newGame(balance, anteMax):
             print(f"Please enter an amount between [$1 - ${anteMax}]:")
             print("--------------------------------------------------")
 
-def printTable(house, table, player):
+def printTable(house, table, player,hand='Hand'):
     print("""
 _____________________________________________________________   
                                         _____________________
@@ -94,12 +98,39 @@ _____________________________________________________________
     print(CardPrinter.rowStr(house, 11))
     print()
     print(CardPrinter.rowStr(table))
-    print("""
+    print(f"""
                ====== 
-                Hand          
+                {hand}          
                ======""")
     print(CardPrinter.rowStr(player, 11))
     print("_____________________________________________________________")
+
+def action(money):
+    """Call, fold"""
+    print(f"Balance: ${money.bal}  Total Bet: ${money.ante}")
+    print(f"Ante: ${money.ante}")
+    print(f"\n(c)all ${money.ante * 2} or (f)old")
+    ur = input(">").lower()
+    return ur
+
+def result(money, winner='', handTup=''):
+    print(f"Balance: ${money.bal}  Total Bet: $0")
+    print(f"Ante: ${money.ante}")
+    if winner:
+        print(f"\n{winner} won  with a {handTup[1]}")
+        print(CardPrinter.rowStr(handTup[0]))
+    print(f"\n(c)ontinue, e(x)it, (a)nte change")
+    ur = input(">")
+    if ur.lower() in ['c', 'x', 'a']:
+        return ur
+    else:
+        print()
+        print("-------------------------------------------")
+        print(f"'{ur}' is an invalid command")
+        print("Please select from the following commands:")
+        print("-------------------------------------------")
+        print()
+
 
 def gameOver():
     print("""   
@@ -109,6 +140,7 @@ def gameOver():
 ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
 ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝""")
+    sys.exit(0)
 
 if __name__ == '__main__':
     gameOver()
