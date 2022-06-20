@@ -34,6 +34,8 @@ def rounds(dk, hd, pMoney):
         river = dk[4:9]
 
         pMoney.anteUp()
+        if pMoney.bal < 0:
+            Prompt.gameOver()
         Prompt.printTable([blank, blank],flop,player)
         ur = Prompt.action(pMoney)
         # call
@@ -47,16 +49,18 @@ def rounds(dk, hd, pMoney):
                 if hd.doesWin(player + river, house + river):
                     pMoney.win(pHand[1])
                     Prompt.printTable(house, river, player, "WIN!")
-                    result_ur = Prompt.result(pMoney,'you',pHand)
+                    result_ur = Prompt.result(pMoney,pHand[0], f"You won with a {pHand[1]}")
                 # lose
                 else:
                     Prompt.printTable(house, river, player, "LOSE")
-                    result_ur = Prompt.result(pMoney, 'the house', hHand)
+                    result_ur = Prompt.result(pMoney, hHand[0], f"The house won with a {hHand[1]}")
+                    if pMoney.bal < 0:
+                        Prompt.gameOver()
             # the house doesn't qualify
             else:
                 pMoney.noQualify()
                 Prompt.printTable(house,river, player)
-                Prompt.result(pMoney,qualify=False)
+                result_ur = Prompt.result(pMoney,msg="The house did not qualify. Bets are pushed.")
         # fold
         elif ur == 'f':
             Prompt.printTable(house, river, player, "FOLD")

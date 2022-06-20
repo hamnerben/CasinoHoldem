@@ -107,20 +107,30 @@ _____________________________________________________________
 
 def action(money):
     """Call, fold"""
-    print(f"Balance: ${money.bal}  Total Bet: ${money.ante}")
-    print(f"Ante: ${money.ante}")
-    print(f"\n(c)all ${money.ante * 2} or (f)old")
-    ur = input(">").lower()
-    return ur
+    while True:
+        print(f"Balance: ${money.bal}  Total Bet: ${money.ante}")
+        print(f"Ante: ${money.ante}")
+        print(f"\n\n\n\n\n\n\n\n\n\n(c)all ${money.ante * 2} or (f)old")
+        ur = input(">").lower()
+        OPTIONS = ['c','f']
+        if ur.lower() in OPTIONS:
+            return ur
+        else:
+            print()
+            print("-------------------------------------------")
+            print(f"'{ur}' is an invalid command")
+            print("Please select from the following commands:")
+            print("-------------------------------------------")
+            print()
 
-def result(money, winner='', handTup='', qualify=True):
+def result(money, hand='', msg=''):
     print(f"Balance: ${money.bal}  Total Bet: $0")
     print(f"Ante: ${money.ante}")
-    if winner:
-        print(f"\n{winner} won with a {handTup[1]}")
-        print(CardPrinter.rowStr(handTup[0]))
-    elif not qualify:
-        print("\nThe house did not qualify, bets are pushed")
+    print(f"\n{msg}")
+    if hand:
+        print(CardPrinter.rowStr(hand))
+    else:
+        print("\n\n\n\n\n\n")
     print(f"\n(c)ontinue, e(x)it, (a)nte change")
     ur = input(">")
     if ur.lower() in ['c', 'x', 'a']:
